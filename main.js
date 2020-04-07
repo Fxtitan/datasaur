@@ -4,9 +4,106 @@
 
 
 
+
 /***********************
  * ITERATION FUNCTIONS *
  **********************/
+const makeDino = (species,period,diet, extinct = false) => {
+  let newDino = {};
+  newDino.species = species;
+  newDino.period = period;
+  newDino.carnivore = diet;
+  newDino.extinct = extinct;
+  return newDino;
+  }
+
+  const makeSingular = (dinoObj) => {
+    let empty = ''
+    if (dinoObj.species.endsWith('us')){
+   empty = dinoObj.species.substring(0, dinoObj.species.length -2);
+      }else {
+    empty = dinoObj.species;
+      }
+      const copy = {
+        species: empty,
+        period: dinoObj.period,
+        carnivore: dinoObj.carnivore,
+        extinct: dinoObj.extinct,
+      }
+    return copy
+  }
+
+  const truncateSpecies = (dinoObj) => {
+    
+    let newDino = {
+      species: dinoObj.species,
+      period: dinoObj.period,
+      carnivore: dinoObj.carnivore,
+      extinct: dinoObj.extinct,
+    }
+  }
+  
+  const makeExtinct = (dinoObj) => {
+    const copy = {
+      species: dinoObj.species,
+      period: dinoObj.period,
+      carnivore: dinoObj.carnivore,
+      extinct: dinoObj.extinct = true,
+    }
+    return copy
+  }
+
+  const isCarnivore = (dinoObj) => {
+    const copy = {
+      species: dinoObj.species,
+      period: dinoObj.period,
+      carnivore: dinoObj.carnivore,
+      extinct: dinoObj.extinct,
+    }
+    return copy.carnivore === true;
+  }
+
+  const isExtinct = (dinoObj) => {
+    const copy = {
+      species: dinoObj.species,
+      period: dinoObj.period,
+      carnivore: dinoObj.carnivore,
+      extinct: dinoObj.extinct,
+    }
+    return copy.extinct === true;
+  }
+
+  const isTriassic = (dinoObj) => {
+    const copy = {
+      species: dinoObj.species,
+      period: dinoObj.period,
+      carnivore: dinoObj.carnivore,
+      extinct: dinoObj.extinct,
+    }
+    return copy.period === 'Triassic';
+  }
+
+  const isJurassic = (dinoObj) => {
+    const copy = {
+      species: dinoObj.species,
+      period: dinoObj.period,
+      carnivore: dinoObj.carnivore,
+      extinct: dinoObj.extinct,
+    }
+    return copy.period === 'Jurassic';
+  }
+
+  const isCretaceous = (dinoObj) =>{
+    const copy = {
+      species: dinoObj.species,
+      period: dinoObj.period,
+      carnivore: dinoObj.carnivore,
+      extinct: dinoObj.extinct,
+    }
+    return copy.period === 'Cretaceous';
+  }
+
+
 
 
 
