@@ -30,17 +30,24 @@ const makeDino = (species,period,diet, extinct = false) => {
         carnivore: dinoObj.carnivore,
         extinct: dinoObj.extinct,
       }
-    return copy
+    return copy //always return whole obj with changes 
   }
 
-  const truncateSpecies = (dinoObj) => {
+  const truncateSpecies = (dinoObj) => { //go over this 
+    let same = "";
+if(dinoObj.species.length > 8){
+same = dinoObj.species.slice(0, 7) + "...";
+}else {
+  same = dinoObj.species
+} 
     
     let newDino = {
-      species: dinoObj.species,
+      species: same,
       period: dinoObj.period,
       carnivore: dinoObj.carnivore,
       extinct: dinoObj.extinct,
     }
+    return newDino
   }
   
   const makeExtinct = (dinoObj) => {
@@ -48,9 +55,10 @@ const makeDino = (species,period,diet, extinct = false) => {
       species: dinoObj.species,
       period: dinoObj.period,
       carnivore: dinoObj.carnivore,
-      extinct: dinoObj.extinct = true,
+      extinct: dinoObj.extinct,
     }
-    return copy
+    copy.extinct = true;
+    return copy;
   }
 
   const isCarnivore = (dinoObj) => {
@@ -140,7 +148,11 @@ return 0
 }
 
 const singularizeDinos = (dino) => {
-  return dino.map(makeSingular);
+  return dino.slice().map(makeSingular);
+}
+
+const truncateDinos = (dino) => {
+  return dino.slice().map(truncateSpecies)
 }
 
 const makeAllExtinct = (allofem) => {
@@ -149,11 +161,35 @@ const makeAllExtinct = (allofem) => {
 
 
 const carnivoresOnly = (onlyUs) => {
-  return onlyUs.filter(isCarnivore);
+  return onlyUs.slice().filter(isCarnivore);
 }
 
-const herbivoresOnly = (something) => {
-  return something.filter(carnivoreIsFirst);
+const isHerbavore = (them) => {
+return (them.carnivore === false)
+}
+
+const herbivoresOnly = (them) => {
+return them.filter(isHerbavore)
+}
+
+const extinctOnly = (abc) => {
+return abc.sort().filter(isExtinct);
+}
+
+
+
+const isNotExtinct = (dinoObj) => {
+  const copy = {
+    species: dinoObj.species,
+    period: dinoObj.period,
+    carnivore: dinoObj.carnivore,
+    extinct: dinoObj.extinct,
+  }
+  return copy.extinct === false;
+}
+
+const notExtinct = (abc) => {
+  return abc.sort().filter(isNotExtinct);
 }
 
 const bySpecies = (abc) => {
@@ -161,17 +197,34 @@ const bySpecies = (abc) => {
 }
 
 const byExtinctLast = (abc) => {
-return abc.sort(extinctIsLast);
+return abc.slice().sort(extinctIsLast);
 }
 
 const byCarnivoresFirst = (abc) => {
-  return abc.sort(carnivoreIsFirst);
+  return abc.slice().sort(carnivoreIsFirst);
 }
 
 const byPeriod = (abc) => {
-  return abc.sort(isInPeriodOrder);
+  return abc.slice().sort(isInPeriodOrder);
 }
 
+const triassicOnly = (abc) => {
+  return abc.filter(isTriassic);
+}
+
+const notTriassic = (abc) => {
+  return abc.filter(noTriassic);
+}
+
+const noTriassic = (dinoObj) =>{
+  const copy = {
+    species: dinoObj.species,
+    period: dinoObj.period,
+    carnivore: dinoObj.carnivore,
+    extinct: dinoObj.extinct,
+  }
+  return copy.period !== "Triassic";
+}
 
 
 
