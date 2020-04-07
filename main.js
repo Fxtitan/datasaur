@@ -20,7 +20,7 @@ const makeDino = (species,period,diet, extinct = false) => {
   const makeSingular = (dinoObj) => {
     let empty = ''
     if (dinoObj.species.endsWith('us')){
-   empty = dinoObj.species.substring(0, dinoObj.species.length -2);
+    empty = dinoObj.species.substring(0, dinoObj.species.length -2);
       }else {
     empty = dinoObj.species;
       }
@@ -102,6 +102,76 @@ const makeDino = (species,period,diet, extinct = false) => {
     }
     return copy.period === 'Cretaceous';
   }
+
+  const isFirstAlphabeticallyBySpecies = (a1,b2) => {
+      if(a1.species > b2.species){ 
+      return 1
+      } else if(a1.species < b2.species) {
+      return -1
+      }
+      return 0
+      }
+
+      const extinctIsLast = (a1,b2) => {
+        if(a1.extinct > b2.extinct){ 
+          return 1
+          } else if(a1.extinct < b2.extinct) {
+          return -1
+          }
+          return 0
+          }
+
+          const carnivoreIsFirst = (a1,b2) => {
+            if(a1.carnivore < b2.carnivore){ 
+              return 1
+              } else if(a1.carnivore > b2.carnivore) {
+              return -1
+              }
+              return 0
+              }
+
+const isInPeriodOrder = (dino1,dino2) => {
+if(dino1.period < dino2.period){
+return 1
+} else if (dino1.period > dino2.period){
+  return -1
+}
+return 0
+}
+
+const singularizeDinos = (dino) => {
+  return dino.map(makeSingular);
+}
+
+const makeAllExtinct = (allofem) => {
+  return allofem.slice().map(makeExtinct);
+}
+
+
+const carnivoresOnly = (onlyUs) => {
+  return onlyUs.filter(isCarnivore);
+}
+
+const herbivoresOnly = (something) => {
+  return something.filter(carnivoreIsFirst);
+}
+
+const bySpecies = (abc) => {
+  return abc.slice().sort(isFirstAlphabeticallyBySpecies);
+}
+
+const byExtinctLast = (abc) => {
+return abc.sort(extinctIsLast);
+}
+
+const byCarnivoresFirst = (abc) => {
+  return abc.sort(carnivoreIsFirst);
+}
+
+const byPeriod = (abc) => {
+  return abc.sort(isInPeriodOrder);
+}
+
 
 
 
